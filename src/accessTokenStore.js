@@ -1,5 +1,4 @@
 let tokenStore = {
-    accessToken: "",
     setAccessToken: function (accessToken) {
         console.log("setting token!")
         this.accessToken = accessToken
