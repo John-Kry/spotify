@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import accessTokenStore from './accessTokenStore'
 import axios from 'axios'
-const spotifyLoginLink = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&redirect_uri=http:%2F%2Flocalhost:3000%2FauthenticationCallback&scope=user-read-private%20user-read-email%20user-top-read&response_type=token&state=123`
+const spotifyLoginLink = `https://accounts.spotify.com/authorize?client_id=${process.env.REACT_APP_CLIENT_ID}&redirect_uri=http:%2F%2Flocalhost:3000%2FauthenticationCallback&scope=user-read-private%20user-read-email%20user-top-read%20user-modify-playback-state&response_type=token&state=123`
 function Root(props) {
     let [topTracks, setTopTracks] = useState([])
     useEffect(() => {
@@ -19,7 +19,9 @@ function Root(props) {
             HELLO
             <ul>
         {topTracks.map((track) => {
-                return <li>{track.name}</li>
+                return <li>{track.name}<button onClick={()=>{
+                    axios.put("https://api.spotify.com/v1/me/player/play",{uris: [track.uri]},{ headers: { 'Authorization': "Bearer " + accessTokenStore.getAccessToken() } })
+                }}>Play Now!</button></li>
             })}
             </ul>
             <a href={spotifyLoginLink}>Login To Spotify</a>
