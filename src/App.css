@@ -1,32 +1,31 @@
 :root {
---primary: #20ff02;
+--primary: #c5ffc3;
 --second: rgb(0, 0, 0);
 }
-#weird-button, #give-weird {
+#title {
 outline: 0;
 border: 2px solid transparent;
 margin: .5em;
 padding: .5em;
 color: var(--second);
 background: var(--primary);
-box-shadow: 0 0 4px rgba(0,0,0,.12);
 transition: 135ms ease-out;
 cursor: pointer;
 }
-#weird-button:hover, #give-weird:hover {
-box-shadow: 0 2px 6px rgba(0, 0, 0, .14);
+#title:hover {
 border-color: var(--primary);
 color: var(--second);
-background: #fff;
+background: #fdc3ff;
 }
-#weird-input {
+#title {
 margin: .5em;
 padding: .5em;
 outline: 0;
 border: 0;
-border-bottom: 1px solid var(--primary);
-box-shadow: 0 4px 4px -3px rgba(0,0,0,.14);
 }
 li{
   display: inherit;
+}
+#artist{
+  font-style: italic;
 }
