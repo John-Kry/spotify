@@ -1,25 +1,20 @@
-import React from 'react';
+import React , {useEffect}from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Root from './Root';
+import AutheticationCallback from './AuthenticationCallback';
 
-function App() {
+function App(props) {
+  useEffect(() => {
+    console.log(props)
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+        <Route path="/" exact component={Root} />
+        <Route path="/authenticationCallback" exact component={AutheticationCallback} />
+    </Router>
+    
   );
 }
 
