@@ -14,14 +14,22 @@ code {
 .header-button{
   margin-right: 10px;
   background-color: #fdc3ff;
-  border: #fdc3ff
+  border: #fdc3ff;
+  border-radius: 10px;
 }
 .header-title{
   margin-bottom: 10px;
   border-bottom: 1;
 }
 .header{
-  margin-left: 1%;
+  background: #c5ffc3;
+  position: -webkit-sticky;
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+}
+.app{
+  height: 100%;
 }
 #profile{
   float: right;
@@ -36,4 +44,10 @@ img{
   top: 0;
   bottom: 0;
   margin: auto;
+}
+.topTracksList{
+  padding-top: 145px;
+}
+.loadingList{
+  text-align: center;
 }

@@ -15,6 +15,8 @@ function Song(props) {
                         }}>{index +1}. {track.name}</p>
                 <p class="subtitle">
                     {artistsArray.join(', ')}
+                    <br/>
+                {props.duration}
                 </p>
             </div>
         </div >
