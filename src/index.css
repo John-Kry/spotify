@@ -23,5 +23,17 @@ code {
 .header{
   margin-left: 1%;
 }
-.header-selected{
+#profile{
+  float: right;
+  margin-right: 1%;
+}
+#profile span{
+  margin-right: 1%;
+  padding-right: 1%;
+}
+img{
+  vertical-align: middle;
+  top: 0;
+  bottom: 0;
+  margin: auto;
 }
