@@ -1,53 +1,56 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+		"Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+		"Helvetica Neue", sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+		monospace;
 }
-.header-button{
-  margin-right: 10px;
-  background-color: #fdc3ff;
-  border: #fdc3ff;
-  border-radius: 10px;
+.header-button {
+	margin-right: 10px;
+	background-color: #fdc3ff;
+	border: #fdc3ff;
+	border-radius: 10px;
 }
-.header-title{
-  margin-bottom: 10px;
-  border-bottom: 1;
+.header-title {
+	margin-bottom: 10px;
+	border-bottom: 1;
 }
-.header{
-  background: #c5ffc3;
-  position: -webkit-sticky;
-  position: fixed;
-  z-index: 100;
-  width: 100%;
+.header {
+	background: #c5ffc3;
+	position: -webkit-sticky;
+	position: fixed;
+	z-index: 100;
+	width: 100%;
 }
-.app{
-  height: 100%;
+.app {
+	height: 100%;
 }
-#profile{
-  float: right;
-  margin-right: 1%;
+#profile {
+	float: right;
+	margin-right: 1%;
 }
-#profile span{
-  margin-right: 1%;
-  padding-right: 1%;
+#profile span {
+	margin-right: 1%;
+	padding-right: 1%;
 }
-img{
-  vertical-align: middle;
-  top: 0;
-  bottom: 0;
-  margin: auto;
+img {
+	vertical-align: middle;
+	top: 0;
+	bottom: 0;
+	margin: auto;
 }
-.topTracksList{
-  padding-top: 145px;
+.topTracksList {
+	padding-top: 145px;
 }
-.loadingList{
-  text-align: center;
+.loadingList {
+	text-align: center;
+}
+.isPlaying {
+	background-color: #fdc3ff !important;
 }
