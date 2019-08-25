@@ -109,47 +109,34 @@ function Root(props) {
 	return (
 		<div className="App">
 			<div className="header">
-				<div className="columns">
-					<div className="column">
-						<span className="header-title">
-							{profile.display_name &&
-								profile.display_name + "'s"}{" "}
-							Top <i>Spotify</i> Tracks
-						</span>
-					</div>
-				</div>
-				<div className="columns">
-					<div className="column">
-						<button
-							className={"header-button"}
-							name="week"
-							onClick={handleDurationClick}>
-							Past week
-						</button>
-						<button
-							className="header-button"
-							name="month"
-							onClick={handleDurationClick}>
-							Past month
-						</button>
-						<button
-							className="header-button"
-							name="year"
-							onClick={handleDurationClick}>
-							Past year
-						</button>
-					</div>
-				</div>
-				<div className="columns">
-					<div className="column">
-						<h3 className="header-selected">
-							Currently: {durationMap[duration].displayValue}
-						</h3>
-						<h3 className="header-selected">
-							Playing Now: {playingNow}
-						</h3>
-					</div>
-				</div>
+				<span className="header-title">
+					{profile.display_name && profile.display_name + "'s"} Top{" "}
+					<i>Spotify</i> Tracks
+				</span>
+				<br />
+				<button
+					className={"header-button"}
+					name="week"
+					onClick={handleDurationClick}>
+					Past week
+				</button>
+				<button
+					className="header-button"
+					name="month"
+					onClick={handleDurationClick}>
+					Past month
+				</button>
+				<button
+					className="header-button"
+					name="year"
+					onClick={handleDurationClick}>
+					Past year
+				</button>
+
+				<h3 className="header-selected">
+					Currently: {durationMap[duration].displayValue}
+				</h3>
+				<h3 className="header-selected">Playing Now: {playingNow}</h3>
 			</div>
 			{
 				<div className="topTracksList">
