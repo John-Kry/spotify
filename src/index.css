@@ -46,11 +46,14 @@ img {
 	margin: auto;
 }
 .topTracksList {
-	padding-top: 97px;
+	padding-top: 121px;
 }
 .loadingList {
 	text-align: center;
 }
 .isPlaying {
 	background-color: #fdc3ff !important;
+}
+.header-selected {
+	white-space: nowrap;
 }

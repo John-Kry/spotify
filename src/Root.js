@@ -10,7 +10,7 @@ const spotifyLoginLink = `https://accounts.spotify.com/authorize?client_id=${
 	process.env.REACT_APP_CLIENT_ID
 }&redirect_uri=http:%2F%2F${
 	arr[2]
-}%2FauthenticationCallback&scope=user-read-private%20user-read-email%20user-top-read%20user-modify-playback-state&response_type=token&state=123`;
+}%2FauthenticationCallback&scope=user-read-private%20user-read-email%20user-top-read%20user-modify-playback-state%20user-read-playback-state&response_type=token&state=123`;
 const durationMap = {
 	week: {
 		displayValue: "Week",
@@ -25,25 +25,91 @@ const durationMap = {
 		value: "long_term"
 	}
 };
-function useForceUpdate() {
-	const [value, set] = useState(true); //boolean state
-	return () => set(!value); // toggle the state to force render
-}
+
 function Root(props) {
 	const [topTracks, setTopTracks] = useState([]);
 	const [duration, setDuration] = useState("week");
 	const [profile, setProfile] = useState({ images: [{ url: "" }] });
 	const [playingNow, setPlayingNow] = useState("");
 	const [loading, setLoading] = useState(true);
+	const [availableDevices, setAvailableDevices] = useState([]);
 	const forceUpdate = useForceUpdate();
-
+	function useForceUpdate() {
+		const [value, set] = useState(true); //boolean state
+		return () => set(!value); // toggle the state to force render
+	}
 	if (!accessTokenStore.getAccessToken()) window.location = spotifyLoginLink;
 	useEffect(() => {
 		updateTracks();
+		function updateTracks() {
+			setLoading(true);
+			axios
+				.get(
+					`https://api.spotify.com/v1/me/top/tracks?time_range=${durationMap[duration].value}&limit=50`,
+					{
+						headers: {
+							Authorization:
+								"Bearer " + accessTokenStore.getAccessToken()
+						}
+					}
+				)
+				.then(result => {
+					console.log(result.data.items);
+					setTopTracks(result.data.items);
+					setLoading(false);
+					window.scrollTo(0, 0);
+				});
+		}
 	}, [duration]);
 	useEffect(() => {
 		getUserProfileData();
+		function getUserProfileData() {
+			axios
+				.get(`https://api.spotify.com/v1/me`, {
+					headers: {
+						Authorization:
+							"Bearer " + accessTokenStore.getAccessToken()
+					}
+				})
+				.then(result => {
+					console.log(result.data);
+					setProfile(result.data);
+				});
+		}
 		getPlayingNow();
+		function getPlayingNow() {
+			setInterval(() => {
+				axios
+					.get(
+						"https://api.spotify.com/v1/me/player/currently-playing",
+						{
+							headers: {
+								Authorization:
+									"Bearer " +
+									accessTokenStore.getAccessToken()
+							}
+						}
+					)
+					.then(result => {
+						if (result.data.item && result.data.item.name)
+							setPlayingNow(result.data.item.name);
+					});
+			}, 500);
+		}
+		getAvailableDevices();
+		function getAvailableDevices() {
+			axios
+				.get(`https://api.spotify.com/v1/me/player/devices`, {
+					headers: {
+						Authorization:
+							"Bearer " + accessTokenStore.getAccessToken()
+					}
+				})
+				.then(response => {
+					console.log(response.data.devices);
+					setAvailableDevices(response.data.devices);
+				});
+		}
 	}, []);
 
 	useEffect(() => {
@@ -56,56 +122,13 @@ function Root(props) {
 		}
 		forceUpdate();
 	}, [playingNow]);
-	function updateTracks() {
-		setLoading(true);
-		axios
-			.get(
-				`https://api.spotify.com/v1/me/top/tracks?time_range=${durationMap[duration].value}&limit=50`,
-				{
-					headers: {
-						Authorization:
-							"Bearer " + accessTokenStore.getAccessToken()
-					}
-				}
-			)
-			.then(result => {
-				console.log(result.data.items);
-				setTopTracks(result.data.items);
-				setLoading(false);
-				window.scrollTo(0, 0);
-			});
-	}
-	function getUserProfileData() {
-		axios
-			.get(`https://api.spotify.com/v1/me`, {
-				headers: {
-					Authorization: "Bearer " + accessTokenStore.getAccessToken()
-				}
-			})
-			.then(result => {
-				console.log(result.data);
-				setProfile(result.data);
-			});
-	}
-	function getPlayingNow() {
-		setInterval(() => {
-			axios
-				.get("https://api.spotify.com/v1/me/player/currently-playing", {
-					headers: {
-						Authorization:
-							"Bearer " + accessTokenStore.getAccessToken()
-					}
-				})
-				.then(result => {
-					if (result.data.item && result.data.item.name)
-						setPlayingNow(result.data.item.name);
-				});
-		}, 500);
-	}
+
 	function handleDurationClick(e) {
 		setDuration(e.target.name);
 	}
-
+	let availableDevicesArray = availableDevices.map(device => {
+		return device.name;
+	});
 	return (
 		<div className="App">
 			<div className="header">
@@ -137,6 +160,9 @@ function Root(props) {
 					Currently: {durationMap[duration].displayValue}
 				</h3>
 				<h3 className="header-selected">Playing Now: {playingNow}</h3>
+				<h3 className="header-selected">
+					Available Devices: {availableDevicesArray.join(", ")}
+				</h3>
 			</div>
 			{
 				<div className="topTracksList">
