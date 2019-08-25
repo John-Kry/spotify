@@ -8,12 +8,12 @@ function Song(props) {
         return artist.name
     })
     return (
-        <div class="card" >
-            <div class="card-content">
-                <p class="title" onClick={() => {
+        <div className="card" >
+            <div className="card-content">
+                <p className="title" onClick={() => {
                             axios.put("https://api.spotify.com/v1/me/player/play", { uris: [track.uri] }, { headers: { 'Authorization': "Bearer " + accessTokenStore.getAccessToken() } })
                         }}>{index +1}. {track.name}</p>
-                <p class="subtitle">
+                <p className="subtitle">
                     {artistsArray.join(', ')}
                     <br/>
                 {props.duration}

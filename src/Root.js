@@ -57,8 +57,8 @@ function Root(props) {
         setInterval(() => {
             axios.get("https://api.spotify.com/v1/me/player/currently-playing", { headers: { 'Authorization': "Bearer " + accessTokenStore.getAccessToken() } })
                 .then((result) => {
-                    console.log(result.data)
-                    setPlayingNow(result.data.item.name)
+                    if(result.data.item && result.data.item.name)
+                        setPlayingNow(result.data.item.name)
                 })
         }, 500)
 
@@ -95,7 +95,7 @@ function Root(props) {
 
                     {!loading ? topTracks.map((track, index) => {
                         const duration = millisToMinutesAndSeconds(track.duration_ms)
-                        return <Song track={track} index={index} duration={duration}></Song>
+                        return <Song track={track} index={index} duration={duration} key={index}></Song>
                     })
                         :
                         <div className="loadingList">
