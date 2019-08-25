@@ -3,8 +3,7 @@ import axios from "axios";
 import accessTokenStore from "./accessTokenStore";
 
 function Song(props) {
-	const { index, track, isPlaying } = props;
-	console.log(props);
+	const { index, track, isPlaying, duration } = props;
 	const artistsArray = track.artists.map(artist => {
 		return artist.name;
 	});
@@ -34,7 +33,7 @@ function Song(props) {
 				<p className="subtitle">
 					{artistsArray.join(", ")}
 					<br />
-					{props.duration}
+					{duration}
 				</p>
 			</div>
 		</div>
