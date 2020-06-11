@@ -8,9 +8,9 @@ import { ClipLoader } from "react-spinners";
 var arr = window.location.href.split("/");
 const spotifyLoginLink = `https://accounts.spotify.com/authorize?client_id=${
 	process.env.REACT_APP_CLIENT_ID
-}&redirect_uri=http:%2F%2F${
+	}&redirect_uri=http:%2F%2F${
 	arr[2]
-}%2FauthenticationCallback&scope=user-read-private%20user-read-email%20user-top-read%20user-modify-playback-state%20user-read-playback-state&response_type=token&state=123`;
+	}%2FauthenticationCallback&scope=user-read-private%20user-read-email%20user-top-read%20user-modify-playback-state%20user-read-playback-state&response_type=token&state=123`;
 const durationMap = {
 	week: {
 		displayValue: "Week",
@@ -116,7 +116,7 @@ function Root(props) {
 		for (const i in topTracks) {
 			if (playingNow === topTracks[i].name) {
 				topTracks[i].isPlaying = true;
-				continue;
+				continue
 			}
 			topTracks[i].isPlaying = false;
 		}
@@ -132,35 +132,35 @@ function Root(props) {
 	return (
 		<div className="App">
 			<div className="header">
-				<span className="header-title">
+				<div className="header-content">
 					{profile.display_name && profile.display_name + "'s"} Top{" "}
 					<i>Spotify</i> Tracks
-				</span>
-				<br />
-				<button
-					className={"header-button"}
-					name="week"
-					onClick={handleDurationClick}>
-					Past week
+				</div>
+				<div className="header-button-container">
+					<button
+						className={"header-button"}
+						name="week"
+						onClick={handleDurationClick}>
+						Past week
 				</button>
-				<button
-					className="header-button"
-					name="month"
-					onClick={handleDurationClick}>
-					Past month
+					<button
+						className=" header-button"
+						name="month"
+						onClick={handleDurationClick}>
+						Past month
 				</button>
-				<button
-					className="header-button"
-					name="year"
-					onClick={handleDurationClick}>
-					Past year
+					<button
+						className="header-button"
+						name="year"
+						onClick={handleDurationClick}>
+						Past year
 				</button>
-
-				<h3 className="header-selected">
+				</div>
+				<h3 className="header-content">
 					Currently: {durationMap[duration].displayValue}
 				</h3>
-				<h3 className="header-selected">Playing Now: {playingNow}</h3>
-				<h3 className="header-selected">
+				<h3 className="header-content">Playing Now: {playingNow}</h3>
+				<h3 className="header-content">
 					Available Devices: {availableDevicesArray.join(", ")}
 				</h3>
 			</div>
@@ -176,20 +176,21 @@ function Root(props) {
 									track={track}
 									index={index}
 									duration={duration}
+									albumImage={track.album.images}
 									isPlaying={track.isPlaying}
 									key={index}></Song>
 							);
 						})
 					) : (
-						<div className="loadingList">
-							<ClipLoader
-								sizeUnit={"px"}
-								size={100}
-								color={"#fdc3ff"}
-								loading={true}
-							/>
-						</div>
-					)}
+							<div className="loadingList">
+								<ClipLoader
+									sizeUnit={"px"}
+									size={100}
+									color={"#fdc3ff"}
+									loading={true}
+								/>
+							</div>
+						)}
 				</div>
 			}
 		</div>

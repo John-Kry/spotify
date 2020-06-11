@@ -16,21 +16,28 @@ code {
 	background-color: #fdc3ff;
 	border: #fdc3ff;
 	border-radius: 10px;
+	
 }
-.header-title {
-	margin-bottom: 10px;
+.header-button-container{
+	margin: 0 auto;
+	text-align: center;
+}
+.header-content {
 	border-bottom: 1;
+	text-align: center;
+ 	margin: 0 auto;
 }
 .header {
 	background: #c5ffc3;
-	position: -webkit-sticky;
+	/* position: -webkit-sticky; */
 	position: fixed;
 	z-index: 100;
+	/* align-self: center; */
 	width: 100%;
+	margin: 0 auto;
+	height: 150px;
 }
-.app {
-	height: 100%;
-}
+
 #profile {
 	float: right;
 	margin-right: 1%;
@@ -43,10 +50,9 @@ img {
 	vertical-align: middle;
 	top: 0;
 	bottom: 0;
-	margin: auto;
 }
 .topTracksList {
-	padding-top: 121px;
+	padding-top: 152px;
 }
 .loadingList {
 	text-align: center;
@@ -56,4 +62,24 @@ img {
 }
 .header-selected {
 	white-space: nowrap;
+}
+.root{
+	/* position: relative; */
+	display: flex;
+	justify-content: center;
+}
+.App{
+	/* max-width: 400px; */
+	display: flex;
+	justify-content: center;
+}
+.title{
+	display: flex;
+	align-items: flex-start;
+}
+.card-image{
+	margin-left: auto;
+}
+.card-img{
+	height: 100px;
 }
